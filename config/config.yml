@@ -1,0 +1,8 @@
+appname: test
+
+db:
+  name:     postgresql
+  user:     odoo
+  password: odoo
+  port:     5432
+  database: postgres

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/go-pg/pg"
 	"github.com/go-pg/pg/orm"
+	"myBlog/config"
 )
 
 type User struct {
@@ -53,9 +54,9 @@ var DB *pg.DB
 
 func init() {
 	DB = pg.Connect(&pg.Options{
-		User:     "odoo",
-		Password: "odoo",
-		Database: "postgres",
+		User:     config.Config.DB.User,
+		Password:  config.Config.DB.Password,
+		Database: config.Config.DB.Database,
 	})
 	err:= createSchema(DB)
 	if err != nil {
