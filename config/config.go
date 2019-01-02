@@ -4,7 +4,7 @@ import (
 	"github.com/jinzhu/configor"
 )
 
-var Config struct{
+var Config struct {
 	APPName string `default:"app name"`
 
 	DB struct {
@@ -13,9 +13,10 @@ var Config struct{
 		Password string `required:"true" env:"DBPassword"`
 		Port     uint   `default:"3306"`
 		Database string `default:"postgres"`
+		Addr     string `default:"127.0.0.1"`
 	}
 }
 
-func init(){
-	configor.Load(&Config,"./config/config.yml")
+func init() {
+	configor.Load(&Config, "./config/config.yml")
 }

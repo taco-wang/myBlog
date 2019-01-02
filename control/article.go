@@ -64,7 +64,7 @@ func handleError(err error) error {
 	return nil
 }
 
-func Add(c *gin.Context) {
+func ArticleAdd(c *gin.Context) {
 	content := c.PostForm("content")
 	title := c.PostForm("title")
 	if len(content) < ArticleMinLength {
@@ -92,6 +92,7 @@ func Add(c *gin.Context) {
 	AddArticle(article)
 	c.JSON(200,gin.H{
 		"message":"ok",
+		"article":article,
 	})
 }
 

@@ -10,11 +10,12 @@ import (
 type User struct {
 	Id     int64
 	Name   string
-	Emails []string
+	Email string
+	Password string
 }
 
 func (u User) String() string {
-	return fmt.Sprintf("User<%d %s %v>", u.Id, u.Name, u.Emails)
+	return fmt.Sprintf("User<%d %s %v>", u.Id, u.Name, u.Email)
 }
 
 type Article struct {
@@ -69,7 +70,8 @@ func createSchema(db *pg.DB) error {
 		(*User)(nil), (*Article)(nil), (*Comment)(nil), (*Block)(nil),
 	} {
 		err := db.CreateTable(model, &orm.CreateTableOptions{
-			Temp: true,
+			Temp: false,
+			IfNotExists:true,
 		})
 		if err != nil {
 			return err
