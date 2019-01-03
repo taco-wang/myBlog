@@ -7,17 +7,18 @@
       <section id="one" class="wrapper style1" v-for="a in articles">
 
         <div class="image fit flush">
-          <img src="static/pic02.jpg" alt="">
+          <!--<img src="https://api.yingjoy.cn/pic/?t=random&w=1920" alt="">-->
+          <!--<img src="{{'https://source.unsplash.com/random/800*600?i=' + a.ID}}" alt="">-->
+          <!--获取随机图片-->
+          <img v-bind:src="getPic">
         </div>
         <header class="special">
           <h2>{{a.Title}}</h2>
-          <!--<p>vehicula urna sed justo bibendum</p>-->
         </header>
         <div class="content">
           {{a.Content}}
-          <!--<p>Curabitur eget semper ante. Morbi eleifend ultricies est, a blandit diam vehicula vel. Vestibulum porttitor nisi quis viverra hendrerit. Suspendisse vel volutpat nibh, vel elementum lacus. Maecenas commodo pulvinar dui, at cursus metus imperdiet vel. Vestibulum et efficitur urna. Duis velit nulla, interdum sed felis sit amet, facilisis auctor nunc. Cras luctus urna at risus feugiat scelerisque nec sed diam. </p>-->
-          <!--<p>Nunc fringilla metus odio, at rutrum augue tristique vel. Nulla ac tellus a neque ullamcorper porta a vitae ipsum. Morbi est sapien, hendrerit quis mi in, aliquam bibendum orci. Vestibulum imperdiet nibh vitae maximus posuere. Aenean sit amet nibh feugiat, condimentum tellus eu, malesuada nunc. Mauris ac pulvinar turpis, sit amet pharetra est. Ut bibendum justo condimentum, vehicula ex vel, venenatis libero. Etiam vehicula urna sed justo bibendum, ac lacinia nunc pulvinar. Integer nec velit orci. Vestibulum pellentesque varius dapibus. Morbi ullamcorper augue est, sed luctus orci fermentum dictum. Nunc tincidunt, nisl consequat convallis viverra, metus nisl ultricies dui, vitae dapibus ligula urna sit amet nibh. Duis ut venenatis enim.</p>-->
         </div>
+        <div> >>>>>>>>>>>>>>>>>>>>>>>分割线<<<<<<<<<<<<<<<<<<<<<</div>
       </section>
 
       <!-- Two -->
@@ -39,6 +40,13 @@ export default {
       start: 0,
       end:0,
   }},
+  methods:{
+    getPic:()=>{
+      axios.get("https://tools.67cc.cn/img/?type=json").then((res)=>{
+        return res.data.url
+      })
+    },
+  },
   mounted() {
     // console.log("data",data.articles)
     let that = this
