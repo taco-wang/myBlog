@@ -27,9 +27,9 @@ type Article struct {
 	gorm.Model
 	Title    string
 	AuthorId int64
-	Author   *User
+	Author   User
 	Content  string
-	Block    *Block
+	Block    Block
 }
 
 func (s Article) String() string {
@@ -38,9 +38,9 @@ func (s Article) String() string {
 
 type Comment struct {
 	gorm.Model
-	Author    *User
+	Author   User
 	Comment   string
-	Commenter *User
+	Commenter User
 }
 
 func (s Comment) String() string {

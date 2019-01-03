@@ -17,18 +17,12 @@ const (
 
 
 func AddArticle(a *db.Article) *db.Article {
-	err := db.DB.Create(a)
-	if err != nil {
-		log.Println("error", err)
-	}
+	db.DB.Create(a)
 	return a
 }
 
 func Detail(a *db.Article) *db.Article {
-	err := db.DB.Select(a)
-	if err != nil {
-		log.Println("error", err)
-	}
+	db.DB.Select(a)
 	return a
 }
 
@@ -48,9 +42,9 @@ func ArticlePage(c *gin.Context)  {
 		END = 10
 	}
 	var articles []db.Article
-	err := db.DB.Model(&articles).Related("Author").Limit(END - START).Offset(START)
-	if err != nil {
-		log.Println("error", err)
+	db.DB.Limit(END - START).Offset(START).Find(&articles)
+	if len(articles) == 0 {
+		articles = []db.Article{}
 	}
 	c.JSON(200,gin.H{
 		"articles":articles,
@@ -75,7 +69,7 @@ func ArticleAdd(c *gin.Context) {
 	user := &db.User{}
 	db.DB.Find(user,userId)
 	article := &db.Article{
-		Author:user,
+		Author:*user,
 		Content:content,
 		AuthorId:userId,
 		Title:title,

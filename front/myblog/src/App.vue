@@ -37,6 +37,7 @@
 </template>
 
 <script>
+  import "../static/main.css"
 export default {
   name: 'App',
   data:()=>{
