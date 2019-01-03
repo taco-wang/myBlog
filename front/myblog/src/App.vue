@@ -9,11 +9,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">{{title}}</a>
+
+          <router-link to="/home">
+            <a class="navbar-brand" href="#">{{title}}</a>
+          </router-link>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">干货</a></li>
+
+            <li class="active"><router-link to="/home">干货</router-link></li>
             <li><a href="#about">杂谈</a></li>
             <!--<li><a href="#contact"></a></li>-->
             <!--<li class="dropdown">-->

@@ -2,7 +2,6 @@ package control
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/go-pg/pg/orm"
 	"log"
 	"myBlog/db"
 	"strconv"
@@ -24,11 +23,6 @@ func AddArticle(a *db.Article) *db.Article {
 func Detail(a *db.Article) *db.Article {
 	db.DB.Select(a)
 	return a
-}
-
-func filter(q *orm.Query) (*orm.Query, error) {
-	q = q.Where(" limit ? ", END-START).Where(" offset ? ", START)
-	return q, nil
 }
 
 func ArticlePage(c *gin.Context)  {
