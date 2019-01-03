@@ -7,3 +7,5 @@ db:
   port:     5432
   database: postgres
   addr:     127.0.0.1
+  connectstring:   "host=127.0.0.1 port=5432 user=odoo dbname=postgres password=odoo sslmode=disable"
+  log:      true

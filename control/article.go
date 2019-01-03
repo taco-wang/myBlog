@@ -15,18 +15,9 @@ const (
 	ArticleMinLength = 10
 )
 
-type Article interface {
-	Add(article *db.Article) *db.Article
-	Detail(article *db.Article) *db.Article
-	ArticlePage(q *orm.Query) []*db.Article
-}
-
-type MyArticle struct {
-	db.Article
-}
 
 func AddArticle(a *db.Article) *db.Article {
-	err := db.DB.Insert(a)
+	err := db.DB.Create(a)
 	if err != nil {
 		log.Println("error", err)
 	}
@@ -42,26 +33,28 @@ func Detail(a *db.Article) *db.Article {
 }
 
 func filter(q *orm.Query) (*orm.Query, error) {
-	q = q.Where(" limit ", END-START).Where(" offset ", START)
+	q = q.Where(" limit ? ", END-START).Where(" offset ? ", START)
 	return q, nil
 }
 
-func ArticlePage(a db.Article, start int, end int) []db.Article {
-	START = start
-	END = end
+func ArticlePage(c *gin.Context)  {
+
+	START = c.GetInt("start")
+	if START < 0 {
+		START = 0
+	}
+	END = c.GetInt("end")
+	if END < 1{
+		END = 10
+	}
 	var articles []db.Article
-	err := db.DB.Model(&articles).Apply(filter).Select()
+	err := db.DB.Model(&articles).Related("Author").Limit(END - START).Offset(START)
 	if err != nil {
 		log.Println("error", err)
 	}
-	return articles
-}
-
-func handleError(err error) error {
-	if err != nil {
-		return err
-	}
-	return nil
+	c.JSON(200,gin.H{
+		"articles":articles,
+	})
 }
 
 func ArticleAdd(c *gin.Context) {
@@ -79,10 +72,8 @@ func ArticleAdd(c *gin.Context) {
 		})
 	}
 	// 先查询用户信息　
-	user := &db.User{
-		Id:userId,
-	}
-	db.DB.Select(user)
+	user := &db.User{}
+	db.DB.Find(user,userId)
 	article := &db.Article{
 		Author:user,
 		Content:content,
@@ -103,12 +94,12 @@ func ArticleDetail(c *gin.Context){
 			"message": "userId 需要",
 		})
 	}
-	article := &db.Article{
-		Id:articleId,
-	}
-	db.DB.Select(article)
+	article := &db.Article{}
+	db.DB.Model(article).Related("Author").Take(article,articleId)
 	log.Println(article)
 	c.JSON(200,gin.H{
 		"article":article,
 	})
 }
+
+

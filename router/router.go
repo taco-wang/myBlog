@@ -19,6 +19,7 @@ func articleRouter (e *gin.Engine) {
 	{
 		api.POST("/Add",control.ArticleAdd)
 		api.POST("/Detail",control.ArticleDetail)
+		api.POST("/Pages",control.ArticlePage)
 	}
 }
 
