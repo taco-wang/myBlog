@@ -18,7 +18,7 @@
           <ul class="nav navbar-nav">
 
             <li class="active"><router-link to="/home">干货</router-link></li>
-            <li><a href="#about">杂谈</a></li>
+            <li><a href="#about"><router-link to="/comment">杂谈</router-link></a></li>
             <!--<li><a href="#contact"></a></li>-->
             <!--<li class="dropdown">-->
               <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>-->

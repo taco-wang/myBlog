@@ -11,7 +11,7 @@ func CorsMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		method := c.Request.Method
 
-		// 核心处理方式
+		// 加入跨域请求头
 		c.Header("Access-Control-Allow-Origin", "*")
 		c.Header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
 		c.Header("Access-Control-Allow-Methods", "GET, OPTIONS, POST, PUT, DELETE")

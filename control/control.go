@@ -1,9 +1,12 @@
 package control
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"myBlog/state"
+)
 
 func Ping(context *gin.Context) {
-	context.JSON(200, gin.H{
+	context.JSON(state.HTTPOKCODE, gin.H{
 		"message": "ok",
 	})
 }

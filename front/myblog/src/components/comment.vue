@@ -10,7 +10,6 @@
         info:[]
     },
     mounted() {
-      axios.post()
     }
   }
 </script>

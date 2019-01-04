@@ -10,7 +10,7 @@
           <!--<img src="https://api.yingjoy.cn/pic/?t=random&w=1920" alt="">-->
           <!--<img src="{{'https://source.unsplash.com/random/800*600?i=' + a.ID}}" alt="">-->
           <!--获取随机图片-->
-          <img v-bind:src="getPic">
+          <!--<img v-bind:src="getPic">-->
         </div>
         <header class="special">
           <h2>{{a.Title}}</h2>
@@ -53,8 +53,8 @@ export default {
     console.log(this)
     axios({url:config.dev.requesturi + '/article/Pages',
     data:JSON.stringify({
-      start:0,
-      end:10
+      start:that.start,
+      end:that.end
     }),
       method:"post"
       }

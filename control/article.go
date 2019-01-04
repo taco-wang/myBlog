@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"myBlog/db"
+	"myBlog/state"
 	"strconv"
 )
 
@@ -40,7 +41,7 @@ func ArticlePage(c *gin.Context)  {
 	if len(articles) == 0 {
 		articles = []db.Article{}
 	}
-	c.JSON(200,gin.H{
+	c.JSON(state.HTTPOKCODE,gin.H{
 		"articles":articles,
 	})
 }
@@ -69,7 +70,7 @@ func ArticleAdd(c *gin.Context) {
 		Title:title,
 	}
 	AddArticle(article)
-	c.JSON(200,gin.H{
+	c.JSON(state.HTTPOKCODE,gin.H{
 		"message":"ok",
 		"article":article,
 	})
@@ -85,7 +86,7 @@ func ArticleDetail(c *gin.Context){
 	article := &db.Article{}
 	db.DB.Model(article).Related("Author").Take(article,articleId)
 	log.Println(article)
-	c.JSON(200,gin.H{
+	c.JSON(state.HTTPOKCODE,gin.H{
 		"article":article,
 	})
 }

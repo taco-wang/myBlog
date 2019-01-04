@@ -30,3 +30,11 @@ func userRouter(e *gin.Engine){
 		api.POST("/Detail",control.UserDetail)
 	}
 }
+
+func commentRouter(e *gin.Engine){
+	api := e.Group("/comment")
+	{
+		api.POST("/Add",control.CommentAdd)
+		api.POST("/Detail",control.CommentDetail)
+	}
+}

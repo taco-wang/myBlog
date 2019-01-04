@@ -3,6 +3,7 @@ package control
 import (
 	"github.com/gin-gonic/gin"
 	"myBlog/db"
+	"myBlog/state"
 )
 
 func UserAdd(c *gin.Context) {
@@ -17,7 +18,7 @@ func UserAdd(c *gin.Context) {
 	}
 
 	db.DB.Create(&user)
-	c.JSON(200,gin.H{
+	c.JSON(state.HTTPOKCODE,gin.H{
 		"userId": user.ID,
 		"user": user,
 	})
@@ -27,7 +28,7 @@ func UserDetail(c *gin.Context) {
 	id := c.GetInt64("userId")
 	user:=db.User{}
 	db.DB.Take(user,id)
-	c.JSON(200,gin.H{
+	c.JSON(state.HTTPOKCODE,gin.H{
 		"user":user,
 	})
 }
