@@ -11,6 +11,7 @@ func R (e * gin.Engine) {
 	e.GET("/ping",control.Ping)
 	articleRouter(e)
 	userRouter(e)
+	commentRouter(e)
 }
 
 
